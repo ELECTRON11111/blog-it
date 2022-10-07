@@ -1,18 +1,43 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
 import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
 import NewPost from '../../components/NewPost/NewPost';
 import './Blog.css';
 
 class Blog extends Component {
+    state = {
+        posts: []
+    }
+
+    componentDidMount() {
+        axios.get("https://jsonplaceholder.typicode.com/posts")
+            .then(response => {
+                const posts = response.data.slice(0, 4);
+                // We can transform the data we get from the backend
+                const updatedPosts = posts.map(post => {
+                    // return a new javascript object where we distribute the properties of the posts and other properties
+                    return {
+                        ...post,
+                        author: "Max"
+                    }
+                });
+                // We can call setState here and won't cause unnecessary re-renders
+                this.setState({posts: updatedPosts});
+            });
+        
+        // DON'T -  call setState here because it causes re-renders 
+    }
+
     render () {
+        const posts = this.state.posts.map(post => {
+            return <Post key={post.id} title ={post.title} author={post.author} />
+        })
         return (
             <div>
                 <section className="Posts">
-                    <Post />
-                    <Post />
-                    <Post />
+                    {posts}
                 </section>
                 <section>
                     <FullPost />
