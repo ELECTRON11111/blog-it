@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
+// We can set some defaults like the baseURL of which every other in the application would be appended to
+axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
+
 
 // Sometimes you might need to write some code that runs globally, whenever an http request is sent or recieved.We can do this with so called "interceptors"
 // "interceptors" are functons you write globally that affects every reuest you make to a server, get, post or even delete.
