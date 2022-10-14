@@ -10,6 +10,11 @@ class NewPost extends Component {
         author: 'Max'
     }
 
+    componentDidMount() {
+        // When we use react-router-dom Link component, It provides some props e.g location, path, history, key, etc
+        console.log(this.props);
+    }
+
     postDataHandler = () => {
         const data = {
             tile: this.state.title,
