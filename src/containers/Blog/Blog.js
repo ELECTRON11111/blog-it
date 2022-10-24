@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Posts from "../Posts/Posts";
 import NewPost from '../NewPost/NewPost';
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Switch, Link } from "react-router-dom";
 import './Blog.css';
 
 class Blog extends Component {
@@ -23,12 +23,10 @@ class Blog extends Component {
                     </nav>
                 </header>
                 
-                <Routes>
-                    {/* <Route path="/" exact element={<h1>OPE</h1>} /> */}
-                    {/* <Route path="/" element={<h1>TY</h1>} /> */}
-                    <Route path="/" exact element={<Posts />} />
-                    <Route path="/new-post" element={<NewPost />} />
-                </Routes>
+                <Switch>
+                    <Route path="/" exact component={Posts} />
+                    <Route path="/new-post" component={NewPost} />
+                </Switch>
                 {/* <section>
                     <FullPost id = {this.state.postSelectedId}/>
                 </section>
