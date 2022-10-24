@@ -6,11 +6,14 @@ import axios from "../../axios";
 import "./Posts.css";
 
 class Posts extends React.Component {
-    state = {
-        posts: [],
-        postSelectedId: null,
-        error: null,
-        loading: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            posts: [],
+            postSelectedId: null,
+            error: null,
+            loading: true
+        }
     }
 
     postSelectedHandler = (id) => {
@@ -20,10 +23,10 @@ class Posts extends React.Component {
     componentDidMount() {
         // When we use react-router-dom Link component, It provides some props e.g location, path, history, key, match, etc
         console.log(this.props);
-        this.setState({loading: true});
-
+        // this.setState({loading: true});
+        
         axios.get("/posts")
-            .then(response => {
+        .then(response => {
                 const posts = response.data.slice(0, 4);
                 // We can transform the data we get from the backend
                 const updatedPosts = posts.map(post => {
@@ -51,7 +54,10 @@ class Posts extends React.Component {
         if(!this.state.loading) {
             if(!this.state.error) {
                 posts = this.state.posts.map(post => {
+                    // We could pass the React-router props into this child using the spread operator. Or if you're targeting something specific just pass directly.
                     return <Post 
+                        // {...this.props}
+                        // match={this.props.match}
                         key={post.id} 
                         title={post.title} 
                         author={post.author} 
