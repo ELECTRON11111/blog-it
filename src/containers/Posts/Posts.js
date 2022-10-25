@@ -18,7 +18,9 @@ class Posts extends React.Component {
     }
 
     postSelectedHandler = (id) => {
-        this.setState({postSelectedId: id});
+        // this.setState({postSelectedId: id});
+        this.props.history.push("/" + id);
+        // this.props.history.push({pathname: "/" + id});
     }
 
     componentDidMount() {
@@ -57,15 +59,14 @@ class Posts extends React.Component {
                 posts = this.state.posts.map(post => {
                     // We could pass the React-router props into this child using the spread operator. Or if you're targeting something specific just pass directly.
                     return (
-                        <Link to= {"/" + post.id} key={post.id}>
-                            <Post 
-                                // {...this.props}
-                                // match={this.props.match
-                                title={post.title} 
-                                author={post.author} 
-                                clicked={() => this.postSelectedHandler(post.id)}
-                            />
-                        </Link>
+                        <Post 
+                            // {...this.props}
+                            // match={this.props.match
+                            key={post.id}
+                            title={post.title} 
+                            author={post.author} 
+                            clicked={() => this.postSelectedHandler(post.id)}
+                        />
                     )
                 });
             } else {
