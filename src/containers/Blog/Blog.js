@@ -14,8 +14,10 @@ class Blog extends Component {
                     <nav>
                         <ul>
                             <li><Link to='/'>Home</Link></li>
+                            {/* If you wanted to append the path to the current url, to make it relative instead of absolute, get the current url from the match prop */}
                             <li><Link to={{
-                                pathname: "./new-post",
+                                // pathname: this.props.match + "/new-post",
+                                pathname: "/new-post",
                                 hash: "#submit",
                                 search: "?quick-submit=true"
                             }} >NewPosts</Link></li>
