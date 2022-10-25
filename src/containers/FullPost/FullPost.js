@@ -8,14 +8,15 @@ class FullPost extends Component {
         loadedPost: null
     }
 
-    componentDidUpdate() {
-        if (this.props.id) {
+    componentDidMount() {
+        // Get the id from the params props gotton from react-router
+        if (this.props.match.params.id) {
             // the id could change depending on what post is clicked, so componentDidUpdate runs multiple times
 
             // So to make http requests with componentDidUpdate
             //Before we do this we make sure that there is a loaded post and its ID is different from that of the props or there is no loadedPost at all
-            if ( !this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)) {
-                axios.get("/posts/" + this.props.id)
+            if ( !this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.match.params.id)) {
+                axios.get("/posts/" + this.props.match.params.id)
                     .then(response => {
                         console.log(response.data);
                     this.setState({loadedPost: response.data});
@@ -27,7 +28,7 @@ class FullPost extends Component {
     deletePostHandler = () => {
         // The delete method takes a url to the specific item to be deleted 
         // Just like we did when getting a specific post
-        axios.delete("/posts/" + this.props.id)
+        axios.delete("/posts/" + this.props.match.params.id)
             .then(response => console.log(response));
     }
 
