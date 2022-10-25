@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Posts from "../Posts/Posts";
 import NewPost from '../NewPost/NewPost';
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch, NavLink } from "react-router-dom";
 import './Blog.css';
 
 class Blog extends Component {
@@ -13,14 +13,22 @@ class Blog extends Component {
                 <header className="Blog">
                     <nav>
                         <ul>
-                            <li><Link to='/'>Home</Link></li>
-                            {/* If you wanted to append the path to the current url, to make it relative instead of absolute, get the current url from the match prop */}
-                            <li><Link to={{
-                                // pathname: this.props.match + "/new-post",
+                            {/* NavLink is similar to the Link component but it adds an active class to whatever Link/path we're on. */}
+                            {/* we add exact to make sure the active class is added to "/" exactly and not "/new-post" */}
+                            {/* You can also change the className for the active link if you want to  Or better still write the styling as inline */}
+                            <li><NavLink 
+                                to='/' 
+                                exact
+                                activeClassName='my-active'
+                                activeStyle={{
+                                    color: "#fa923f",
+                                    textDecoration: "underline"
+                                }}>Home</NavLink></li>
+                            <li><NavLink to={{
                                 pathname: "/new-post",
                                 hash: "#submit",
                                 search: "?quick-submit=true"
-                            }} >NewPosts</Link></li>
+                            }} >NewPosts</NavLink></li>
                         </ul>
                     </nav>
                 </header>

@@ -12,7 +12,7 @@ class NewPost extends Component {
 
     componentDidMount() {
         // When we use react-router-dom Link component, It provides some props e.g location, path, history, key, etc
-        console.log(this.props);
+        // console.log(this.props);
     }
 
     postDataHandler = () => {
