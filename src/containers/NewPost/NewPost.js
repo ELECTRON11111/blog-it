@@ -27,18 +27,22 @@ class NewPost extends Component {
         axios.post("https://jsonplaceholder.typicode.com/posts", data)
             .then(response => {
                 console.log(response);
-                this.setState({submitted: true});
+                // Remember we can also redirect pages by using the push() method from our history prop
+                // The push method places the posts page on the stack of pages while redirect component replaces the page in the stack
+                // We could replicate the behavior of the Redirect component using the replate() method from the history prop.
+                this.props.history.push("/posts");
+                // this.setState({submitted: true});
             }); 
     }
 
     render () {
-        let redirect = null;
-        if (this.state.submitted) {
-            redirect = <Redirect to="/" />
-        }
+        // let redirect = null;
+        // if (this.state.submitted) {
+        //     redirect = <Redirect to="/" />
+        // }
         return (
             <div className="NewPost">
-                {redirect}
+                {/* {redirect} */}
                 <h1>Add a Post</h1>
                 <label>Title</label>
                 <input type="text" value={this.state.title} onChange={(event) => this.setState({title: event.target.value})} />
