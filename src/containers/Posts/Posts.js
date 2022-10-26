@@ -1,9 +1,10 @@
 import React from "react";
 
+import FullPost from "../FullPost/FullPost";
 import Post from "../../components/Post/Post";
 import Spinner from "../../components/Spinner/Spinner";
 import axios from "../../axios";
-import { Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "./Posts.css";
 
 class Posts extends React.Component {
@@ -19,8 +20,8 @@ class Posts extends React.Component {
 
     postSelectedHandler = (id) => {
         // this.setState({postSelectedId: id});
-        this.props.history.push("/" + id);
-        // this.props.history.push({pathname: "/" + id});
+        this.props.history.push("/posts/" + id);
+        // this.props.history.push({pathname: "/posts/" + id});
     }
 
     componentDidMount() {
@@ -70,16 +71,29 @@ class Posts extends React.Component {
                     )
                 });
             } else {
-                posts = <h1>{this.state.error}</h1>;
+                posts = (
+                    <div style={{
+                        display:"flex", 
+                        flexDirection:"column",
+                        justifyContent:"center"
+                    }}>
+                        <h1 style={{color: "red", textAlign: "center"}}>{this.state.error}</h1>
+                        <p>Check your internet and Try reloading the page</p>
+                    </div>
+                )
             }
         }
 
         
         
         return (
-            <section className="Posts">
-                {posts}
-            </section>
+            <div>
+                <section className="Posts">
+                    {posts}
+                </section>
+                {/* This is a nested route because it is under/inside the Posts route */}
+                <Route path={this.props.match.url + "/:id"} exact component={FullPost} />
+            </div>
         )
         
     }

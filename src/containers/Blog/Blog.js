@@ -4,8 +4,6 @@ import Posts from "../Posts/Posts";
 import NewPost from '../NewPost/NewPost';
 import { Route, Switch, NavLink } from "react-router-dom";
 import './Blog.css';
-import FullPost from '../FullPost/FullPost';
-
 class Blog extends Component {
 
     render () {
@@ -18,13 +16,13 @@ class Blog extends Component {
                             {/* we add exact to make sure the active class is added to "/" exactly and not "/new-post" */}
                             {/* You can also change the className for the active link if you want to  Or better still write the styling as inline */}
                             <li><NavLink 
-                                to='/' 
+                                to='/posts/' 
                                 exact
                                 activeClassName='my-active'
                                 activeStyle={{
                                     color: "#fa923f",
                                     textDecoration: "underline"
-                                }}>Home</NavLink></li>
+                                }}>Posts</NavLink></li>
                             <li><NavLink to={{
                                 pathname: "/new-post",
                                 hash: "#submit",
@@ -35,17 +33,9 @@ class Blog extends Component {
                 </header>
                 
                 <Switch>
-                    <Route path="/" exact component={Posts} />
                     <Route path="/new-post" component={NewPost} />
-                    {/* The : shows we're rendering dynamic content for the path i.e passing route parameters */}
-                    <Route path="/:id" exact component={FullPost} />
+                    <Route path="/posts/" component={Posts} />
                 </Switch>
-                {/* <section>
-                    <FullPost id = {this.state.postSelectedId}/>
-                </section>
-                <section>
-                    <NewPost />
-                </section> */}
             </div>
         );
     }

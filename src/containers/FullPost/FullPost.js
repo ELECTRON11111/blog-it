@@ -9,13 +9,17 @@ class FullPost extends Component {
     }
 
     componentDidMount() {
+        this.loadData();
+    }
+
+    componentDidUpdate() {
+        this.loadData();
+    }
+
+    loadData() {
         // Get the id from the params props gotton from react-router
         if (this.props.match.params.id) {
-            // the id could change depending on what post is clicked, so componentDidUpdate runs multiple times
-
-            // So to make http requests with componentDidUpdate
-            //Before we do this we make sure that there is a loaded post and its ID is different from that of the props or there is no loadedPost at all
-            if ( !this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.match.params.id)) {
+            if ( !this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id != this.props.match.params.id)) {
                 axios.get("/posts/" + this.props.match.params.id)
                     .then(response => {
                         console.log(response.data);
