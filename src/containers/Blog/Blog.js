@@ -5,6 +5,9 @@ import NewPost from '../NewPost/NewPost';
 import { Route, Switch, NavLink, Redirect } from "react-router-dom";
 import './Blog.css';
 class Blog extends Component {
+    state = {
+        auth: false
+    }
 
     render () {
         return (
@@ -33,9 +36,12 @@ class Blog extends Component {
                 </header>
                 
                 <Switch>
-                    <Route path="/new-post" component={NewPost} />
+                    {/* conditionally rendering routes - setting up Guards */}
+                    {this.state.auth? <Route path="/new-post" component={NewPost} /> : null}
                     <Route path="/posts/" component={Posts} />
-                    <Redirect from='/' to="/posts/" />
+                    {/* Render content  for an unknown route, 404 case. */}
+                    <Route render={() => <h1>404, page not found</h1>} />
+                    {/* <Redirect from='/' to="/posts/" /> */}
                     {/* <Route path="/" component={Posts} /> */}
                 </Switch>
             </div>
